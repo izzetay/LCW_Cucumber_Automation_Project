@@ -1,4 +1,4 @@
-package PAGES;
+package pages;
 
 import Utility.GWD;
 import org.openqa.selenium.Keys;

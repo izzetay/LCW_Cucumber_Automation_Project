@@ -14,7 +14,7 @@ public class GWD {
     public static WebDriverWait wait;
     public static JavascriptExecutor js;
 
-    public static WebDriver getDriver(){
+    public static WebDriver getDriver() {
 
         if (threads.get() == null) {
             WebDriverManager.chromedriver().setup();
@@ -23,7 +23,7 @@ public class GWD {
 
             threads.get().manage().window().maximize();
         }
-        if(wait == null && js == null){
+        if (wait == null && js == null) {
             threads.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
             threads.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
             wait = new WebDriverWait(threads.get(), Duration.ofSeconds(20));
@@ -32,5 +32,18 @@ public class GWD {
 
         return threads.get();
     }
-}
+        public static void quitDriver() {
+            if (threads.get() != null) {
+
+                threads.get().quit();
+
+                WebDriver driver = threads.get();
+
+                driver = null;
+
+                threads.set(driver);
+            }
+        }
+    }
+
 

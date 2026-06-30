@@ -1,20 +1,21 @@
 package StepDefinations;
 
-import PAGES.Navbar;
-import PAGES.SearchPage;
-import Utility.GWD;
 import io.cucumber.java.PendingException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import pages.Navbar;
+import pages.SearchPage;
+import Utility.GWD;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class SearchSteps extends GWD {
 
+    private static final Logger logger = LogManager.getLogger(MainPageSteps.class);
     SearchPage sp = new SearchPage();
     Navbar nb = new Navbar();
 
@@ -60,7 +61,7 @@ public class SearchSteps extends GWD {
     @Then("User must see {string} in products 10 at least")
     public void userMustSeeInProductsAtLeast(String arg0) {
         int i = 0;
-        for (WebElement element : sp.productNames){
+        for (WebElement element : sp.PRODUCT_NAMES){
             if (element.getText().toLowerCase().contains(arg0)){
                 i++;
             }
@@ -98,4 +99,34 @@ public class SearchSteps extends GWD {
         Assert.assertTrue(nb.searchInput.getAttribute("value").isEmpty());
     }
 
+    @Then("User must see {string} in products brands 10 at least")
+    public void userMustSeeInProductsBrandsAtLeast(String arg0) {
+        int i = 0;
+        for (WebElement element : sp.brandingNames){
+            if (element.getText().toLowerCase().contains(arg0.toLowerCase())){
+                i++;
+            }
+            if (i == 10){
+                break;
+            }
+        }
+
+        if(!(i == 10)){
+            Assert.fail();
+        }
+    }
+
+    @Then("Product size must be same with search page info")
+    public void productSizeMustBeSameWithSearchPageInfo() {
+        logger.info("Sayfadaki ürün sayısı alınıyor.");
+
+        try {
+            Assert.assertTrue(sp.PRODUCT_NAMES.size() == Integer.parseInt(sp.PRODUCT_COUNT_INFO.getText()));
+            logger.info("Sayfadaki ürün sayısı doğrulandı.");
+        } catch (AssertionError e){
+            logger.warn(e.getMessage());
+            throw e;
+        }
+
+    }
 }

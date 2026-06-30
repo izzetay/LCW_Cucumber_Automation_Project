@@ -1,4 +1,4 @@
-package PAGES;
+package pages;
 
 import Utility.GWD;
 import org.openqa.selenium.WebElement;
@@ -10,8 +10,8 @@ public class MainPage extends HelperFunctions {
         PageFactory.initElements(GWD.getDriver(),this);
     }
     @FindBy(id = "cookieseal-banner-accept")
-    public WebElement cookiesAcceptButton;
+    public WebElement COOKIES_ACCEPT_BUTTON;
 
     @FindBy(className = "ins-web-opt-in-reminder-close-button")
-    public WebElement closeNotificationButton;
+    public WebElement CLOSE_NOTIFICATION_BUTTON;
 }

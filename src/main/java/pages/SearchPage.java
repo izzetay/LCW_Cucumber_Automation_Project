@@ -1,4 +1,4 @@
-package PAGES;
+package pages;
 
 import Utility.GWD;
 import org.openqa.selenium.WebElement;
@@ -23,5 +23,11 @@ public class SearchPage extends HelperFunctions {
     public WebElement notFoundText;
 
     @FindBy(css = ".product-description.product-card-info__description")
-    public List<WebElement> productNames;
+    public List<WebElement>  PRODUCT_NAMES;
+
+    @FindBy(className = "product-brand")
+    public List<WebElement> brandingNames;
+
+    @FindBy(className = "load-more__info-text-viewed-products")
+    public WebElement PRODUCT_COUNT_INFO;
 }
